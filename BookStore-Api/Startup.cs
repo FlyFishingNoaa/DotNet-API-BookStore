@@ -12,6 +12,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Swashbuckle;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.Swagger;
 
 namespace BookStore_Api
 {
@@ -32,7 +35,15 @@ namespace BookStore_Api
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            //services.AddRazorPages();
+
+            services.AddSwaggerGen(c => {
+                c.SwaggerDoc("v1", new OpenApiInfo {
+                    Title = "Book Store API",                    
+                    Version = "v1",
+                    Description = "This is flys first API"} );
+            });
+            
+
             services.AddControllers();
         }
 
@@ -50,6 +61,14 @@ namespace BookStore_Api
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+
+            app.UseSwagger(setupAction: null);
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Book Store API");
+                c.RoutePrefix = "swagger";
+            });
 
             app.UseHttpsRedirection();
             
