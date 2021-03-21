@@ -7,11 +7,22 @@ using System.Threading.Tasks;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BookStore_Api.Controllers
-{
+{ 
+    /// <summary>
+    /// This is Flys First Controller
+    /// </summary>
+    
     [Route("api/[controller]")]
     [ApiController]
+
+
+
     public class HomeController : ControllerBase
     {
+        /// <summary>
+        ///  Gets Flys Values
+        /// </summary>
+        /// <returns></returns>
         // GET: api/<HomeController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -19,6 +30,11 @@ namespace BookStore_Api.Controllers
             return new string[] { "value1", "value2" };
         }
 
+        /// <summary>
+        /// Gets Flys ID values
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET api/<HomeController>/5
         [HttpGet("{id}")]
         public string Get(int id)
@@ -26,11 +42,20 @@ namespace BookStore_Api.Controllers
             return "value";
         }
 
+        /// <summary>
+        ///  Posts Flys values
+        /// </summary>
+        /// <param name="value"></param>
         // POST api/<HomeController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
+        /// <summary>
+        /// Puts Flys Values
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="value"></param>
 
         // PUT api/<HomeController>/5
         [HttpPut("{id}")]
@@ -38,6 +63,10 @@ namespace BookStore_Api.Controllers
         {
         }
 
+        /// <summary>
+        /// Deletes the Fly
+        /// </summary>
+        /// <param name="id"></param>
         // DELETE api/<HomeController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
