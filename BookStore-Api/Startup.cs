@@ -15,6 +15,8 @@ using System.Threading.Tasks;
 using Swashbuckle;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.Swagger;
+using System.IO;
+using System.Reflection;
 
 namespace BookStore_Api
 {
@@ -40,8 +42,14 @@ namespace BookStore_Api
                 c.SwaggerDoc("v1", new OpenApiInfo {
                     Title = "Book Store API",                    
                     Version = "v1",
-                    Description = "This is flys first API"} );
+                    Description = "This is flys first API"} 
+                );
+                var xfile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xpath = Path.Combine(AppContext.BaseDirectory, xfile);
+                c.IncludeXmlComments(xpath);
             });
+
+            
             
 
             services.AddControllers();
@@ -67,8 +75,12 @@ namespace BookStore_Api
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Book Store API");
-                c.RoutePrefix = "swagger";
+                c.RoutePrefix = "";
             });
+
+
+
+
 
             app.UseHttpsRedirection();
             
