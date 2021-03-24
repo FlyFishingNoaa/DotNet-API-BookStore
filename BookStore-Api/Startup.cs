@@ -17,6 +17,8 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.Swagger;
 using System.IO;
 using System.Reflection;
+using BookStore_Api.Services;
+using BookStore_Api.Contracts;
 
 namespace BookStore_Api
 {
@@ -49,8 +51,8 @@ namespace BookStore_Api
                 c.IncludeXmlComments(xpath);
             });
 
-            
-            
+
+            services.AddSingleton<ILoggerServices, LoggerService>();
 
             services.AddControllers();
         }
