@@ -139,6 +139,104 @@ namespace BookStore_Api.Controllers
 
 
 
+        /// <summary>
+        /// Updates Author info in Flys Book Store
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="authorDTO"></param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Update(int id, [FromBody] AuthorUpdateDTO authorDTO)
+        {
+            try
+            {
+                if (id < 1 || authorDTO == null || id != authorDTO.Id)
+                {
+                    _logger.LogWarn($"Empty Request was submitted");
+                    return BadRequest(ModelState);
+                }
+                if (!ModelState.IsValid)
+                {
+                    _logger.LogWarn($"Bad Data Dude");
+                    return BadRequest(ModelState);
+                }
+                var author = _mapper.Map<Author>(authorDTO);
+                var isSuccess = await _authorRepository.Update(author);
+
+                if (!isSuccess)
+                {
+                    _logger.LogWarn($"Bad Data Dude");
+                    return InternalError($"Did not Update to Flys Book store ");
+                }
+
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return InternalError($"{e.Message } - {e.StackTrace }");
+            }
+
+
+        }
+
+
+
+        /// <summary>
+        /// Updates Author info in Flys Book Store
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="authorDTO"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Delete(int id, [FromBody] AuthorDeleteDTO authorDTO)
+        {
+            try
+            {
+                if (id < 1 || authorDTO == null || id != authorDTO.Id)
+                {
+                    _logger.LogWarn($"Empty Request was submitted");
+                    return BadRequest(ModelState);
+                }
+                if (!ModelState.IsValid)
+                {
+                    _logger.LogWarn($"Bad Data Dude");
+                    return BadRequest(ModelState);
+                }
+
+                var author = await _authorRepository.FindByID(id);
+                if (author == null)
+                {
+                    return NotFound();
+                }
+
+
+                //var author = _mapper.Map<Author>(authorDTO);
+                var isSuccess = await _authorRepository.Delete(author);
+
+                if (!isSuccess)
+                {
+                    _logger.LogWarn($"Bad Data Dude");
+                    return InternalError($"Did not Update to Flys Book store ");
+                }
+
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return InternalError($"{e.Message } - {e.StackTrace }");
+            }
+
+
+        }
+
+
+
 
         private ObjectResult InternalError(string message)
         {
