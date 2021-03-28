@@ -4,6 +4,31 @@
         <name>BookStore-Api</name>
     </assembly>
     <members>
+        <member name="T:BookStore_Api.Controllers.AuthorsController">
+            <summary>
+            Flys BookStore Authors Endpoint that connects to the DataBase
+            </summary>
+        </member>
+        <member name="M:BookStore_Api.Controllers.AuthorsController.GetAuthors">
+            <summary>
+            Get all Authors in Flys Book Store
+            </summary>
+            <returns>List of Authors</returns>
+        </member>
+        <member name="M:BookStore_Api.Controllers.AuthorsController.GetAuthor(System.Int32)">
+            <summary>
+            Get Author in Flys book store by ID
+            </summary>
+            <param name="id"></param>
+            <returns>Ruturns Author from Flys book store</returns>
+        </member>
+        <member name="M:BookStore_Api.Controllers.AuthorsController.Create(BookStore_Api.Data.DTOs.AuthorCreateDTO)">
+            <summary>
+            Creates a new Author in Flys Book Store
+            </summary>
+            <param name="authorDTO"></param>
+            <returns></returns>
+        </member>
         <member name="T:BookStore_Api.Controllers.HomeController">
             <summary>
             This is Flys First Controller

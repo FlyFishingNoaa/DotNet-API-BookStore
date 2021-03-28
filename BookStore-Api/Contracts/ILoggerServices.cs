@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BookStore_Api.Contracts
 {
-    public interface  ILoggerServices
+    public interface ILoggerServices
     {
 
         void LogInfo(string message);
