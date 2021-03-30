@@ -158,6 +158,11 @@ namespace BookStore_Api.Controllers
                     _logger.LogWarn($"Empty Request was submitted");
                     return BadRequest(ModelState);
                 }
+                var isExists = await _authorRepository.FindByID(id);
+                if (isExists == null)
+                {
+                    return NotFound();
+                }
                 if (!ModelState.IsValid)
                 {
                     _logger.LogWarn($"Bad Data Dude");
@@ -198,7 +203,7 @@ namespace BookStore_Api.Controllers
         {
             try
             {
-                if (id < 1 || authorDTO == null || id != authorDTO.Id)
+                if (id < 1 )
                 {
                     _logger.LogWarn($"Empty Request was submitted");
                     return BadRequest(ModelState);
@@ -214,15 +219,13 @@ namespace BookStore_Api.Controllers
                 {
                     return NotFound();
                 }
-
-
-                //var author = _mapper.Map<Author>(authorDTO);
+                                
                 var isSuccess = await _authorRepository.Delete(author);
 
                 if (!isSuccess)
                 {
                     _logger.LogWarn($"Bad Data Dude");
-                    return InternalError($"Did not Update to Flys Book store ");
+                    return InternalError($"Did not Delete from Flys Book store ");
                 }
 
                 return NoContent();

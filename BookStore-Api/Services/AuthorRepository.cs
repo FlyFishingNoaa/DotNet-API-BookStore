@@ -19,6 +19,8 @@ namespace BookStore_Api.Services
         }
 
 
+       
+
 
         public async Task<bool> Create(Author entity)
         {
@@ -42,6 +44,11 @@ namespace BookStore_Api.Services
         {
             var author = await _db.Authors.FindAsync(id);
             return author; 
+        }
+
+        public async Task<bool> isExists(int id)
+        {
+            return await _db.Authors.AnyAsync(q => q.Id == id);
         }
 
         public async Task<bool> Save()
