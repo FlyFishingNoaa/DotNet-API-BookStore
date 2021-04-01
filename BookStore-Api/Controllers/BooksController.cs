@@ -199,7 +199,7 @@ namespace BookStore_Api.Controllers
         /// <summary>
         /// Delete a book in Flys Book Store
         /// </summary>
-        /// <param name="id"></param>       
+        /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
