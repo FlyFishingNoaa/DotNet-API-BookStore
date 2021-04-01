@@ -35,4 +35,36 @@ namespace BookStore_Api.Data.DTOs
 
     }
 
+    public class AuthorUpdateDTO
+    {
+
+
+        public int Id { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string Bio { get; set; }
+
+
+        //public virtual IList<BookDTO> Books { get; set; }
+    }
+
+    public class AuthorDeleteDTO
+    {
+
+
+        public int Id { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string Bio { get; set; }
+
+
+        //public virtual IList<BookDTO> Books { get; set; }
+    }
+
 }

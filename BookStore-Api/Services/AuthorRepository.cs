@@ -1,9 +1,7 @@
 ﻿using BookStore_Api.Contracts;
 using BookStore_Api.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BookStore_Api.Services
@@ -18,6 +16,8 @@ namespace BookStore_Api.Services
             _db = db; 
         }
 
+
+       
 
 
         public async Task<bool> Create(Author entity)
@@ -42,6 +42,11 @@ namespace BookStore_Api.Services
         {
             var author = await _db.Authors.FindAsync(id);
             return author; 
+        }
+
+        public async Task<bool> isExists(int id)
+        {
+            return await _db.Authors.AnyAsync(q => q.Id == id);
         }
 
         public async Task<bool> Save()

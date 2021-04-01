@@ -32,6 +32,20 @@ namespace BookStore_Api.Controllers
         }
 
 
+        /// <summary>
+        /// Gets Flys ID values
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        // GET api/<HomeController>/5
+        [HttpGet("{id}")]
+        public string Get(int id)
+        {
+            _logger.LogDebug("Got Flys Home Controller Value");
+            return "value";
+        }
+
+
 
         /// <summary>
         ///  Gets Flys Values
@@ -45,18 +59,7 @@ namespace BookStore_Api.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        /// <summary>
-        /// Gets Flys ID values
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        // GET api/<HomeController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            _logger.LogDebug("Got Flys Home Controller Value");
-            return "value";
-        }
+       
 
         /// <summary>
         ///  Posts Flys values
@@ -91,6 +94,9 @@ namespace BookStore_Api.Controllers
             _logger.LogInfo("Accessed Flys Home Controller and got a Warning");
         }
 
-        
+
+       
+
+
     }
 }
