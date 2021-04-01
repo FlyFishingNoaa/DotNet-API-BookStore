@@ -34,6 +34,10 @@ namespace BookStore_Api.Controllers
         }
 
 
+
+        
+
+
         /// <summary>
         /// Get all Authors in Flys Book Store
         /// </summary>
@@ -189,6 +193,8 @@ namespace BookStore_Api.Controllers
 
 
 
+
+
         /// <summary>
         /// Updates Author info in Flys Book Store
         /// </summary>
@@ -203,7 +209,7 @@ namespace BookStore_Api.Controllers
         {
             try
             {
-                if (id < 1 )
+                if (id < 1)
                 {
                     _logger.LogWarn($"Empty Request was submitted");
                     return BadRequest(ModelState);
@@ -219,7 +225,7 @@ namespace BookStore_Api.Controllers
                 {
                     return NotFound();
                 }
-                                
+
                 var isSuccess = await _authorRepository.Delete(author);
 
                 if (!isSuccess)
@@ -237,6 +243,8 @@ namespace BookStore_Api.Controllers
 
 
         }
+
+
 
 
 

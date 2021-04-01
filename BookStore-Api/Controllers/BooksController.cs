@@ -96,7 +96,7 @@ namespace BookStore_Api.Controllers
 
 
         /// <summary>
-        /// Creates a new Author in Flys Book Store
+        /// Creates a new Book in Flys Book Store
         /// </summary>
         /// <param name="bookDTO"></param>        
         /// <returns></returns>
@@ -147,7 +147,7 @@ namespace BookStore_Api.Controllers
 
 
         /// <summary>
-        /// Updates Author info in Flys Book Store
+        /// Updates Book info in Flys Book Store
         /// </summary>
         /// <param name="id"></param>
         /// <param name="bookDTO"></param>
@@ -196,11 +196,11 @@ namespace BookStore_Api.Controllers
 
 
 
-       /// <summary>
-       /// Delete the book 
-       /// </summary>
-       /// <param name="id"></param>       
-       /// <returns></returns>
+        /// <summary>
+        /// Delete a book in Flys Book Store
+        /// </summary>
+        /// <param name="id"></param>       
+        /// <returns></returns>
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -247,75 +247,7 @@ namespace BookStore_Api.Controllers
 
         }
 
-
-
-
-
-
-
-        /// <summary>
-        /// Creates a new Author in Flys Book Store
-        /// </summary>
-        /// <param name="bookDTO"></param>        
-        /// <returns></returns>
-        //[HttpPost]
-        //[ProducesResponseType(StatusCodes.Status201Created)]
-        //[ProducesResponseType(StatusCodes.Status404NotFound)]
-        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        //public async Task<IActionResult> Update([FromBody] BookUpdateDTO bookDTO)
-        //{
-
-        //    var location = GetControllerActionNames();
-        //    try
-        //    {
-        //        if (bookDTO == null)
-        //        {
-        //            _logger.LogWarn($"Empty Request was submitted");
-        //            return BadRequest(ModelState);
-        //        }
-        //        if (!ModelState.IsValid)
-        //        {
-        //            _logger.LogWarn($"Bad Data Dude");
-        //            return BadRequest(ModelState);
-        //        }
-        //        var book = _mapper.Map<Book>(bookDTO);
-        //        var isSuccess = await _bookRepository.Update(book);
-
-        //        if (!isSuccess)
-        //        {
-        //            _logger.LogWarn($"Bad Data Dude");
-        //            return InternalError($"Did not write to Flys Book store ");
-        //        }
-
-
-        //        //todo: add logging 
-        //        return Created("Create", new { book });
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return InternalError($"{e.Message } - {e.StackTrace }");
-        //    }
-
-
-        //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+           
 
 
 
