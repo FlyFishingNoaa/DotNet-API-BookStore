@@ -34,10 +34,68 @@ namespace BookStore_Api.Controllers
 
 
 
+        /// <summary>
+        /// Delete a book in Flys Book Store
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Delete(int id)
+        {
+
+            var location = GetControllerActionNames();
+            try
+            {
+                if (id < 1)
+                {
+                    _logger.LogWarn($"Empty Request was submitted");
+                    return BadRequest(ModelState);
+                }
+                if (!ModelState.IsValid)
+                {
+                    _logger.LogWarn($"Bad Data Dude");
+                    return BadRequest(ModelState);
+                }
+
+                var book = await _bookRepository.FindByID(id);
+                if (book == null)
+                {
+                    return NotFound();
+                }
+
+
+                //ToDo: add isExists logic 
+                //Todo: Refactor Errors and messages 
+                var isSuccess = await _bookRepository.Delete(book);
+
+                if (!isSuccess)
+                {
+                    // _logger.LogIError($"{location} {e.Message } - {e.StackTrace }");
+                    _logger.LogWarn($"Bad Data Dude");
+                    return InternalError($"Did not Delete from Flys Book store ");
+                }
+
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                _logger.LogIError($"{location} {e.Message } - {e.StackTrace }");
+                return InternalError($"{e.Message } - {e.StackTrace }");
+            }
+
+
+        }
+
+
+
 
         /// <summary>
         /// Gets a Book in Flys Book Store by ID
         /// </summary>
+        // GET api/<BooksController>/5
         [HttpGet("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -158,6 +216,7 @@ namespace BookStore_Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Update(int id, [FromBody] BookUpdateDTO bookDTO)
         {
+            var location = GetControllerActionNames();
             try
             {
                 if (id < 1 || bookDTO == null || id != bookDTO.Id)
@@ -196,64 +255,8 @@ namespace BookStore_Api.Controllers
 
 
 
-        /// <summary>
-        /// Delete a book in Flys Book Store
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpDelete("{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Delete(int id)
-        {
-            try
-            {
-                if (id < 1)
-                {
-                    _logger.LogWarn($"Empty Request was submitted");
-                    return BadRequest(ModelState);
-                }
-                if (!ModelState.IsValid)
-                {
-                    _logger.LogWarn($"Bad Data Dude");
-                    return BadRequest(ModelState);
-                }
-
-                var book = await _bookRepository.FindByID(id);
-                if (book == null)
-                {
-                    return NotFound();
-                }
-
-
-                //ToDo: add isExists logic 
-                //Todo: Refactor Errors and messages 
-                var isSuccess = await _bookRepository.Delete(book);
-
-                if (!isSuccess)
-                {
-                    _logger.LogWarn($"Bad Data Dude");
-                    return InternalError($"Did not Delete from Flys Book store ");
-                }
-
-                return NoContent();
-            }
-            catch (Exception e)
-            {
-                return InternalError($"{e.Message } - {e.StackTrace }");
-            }
-
-
-        }
-
+       
            
-
-
-
-
-
-
 
         
 
