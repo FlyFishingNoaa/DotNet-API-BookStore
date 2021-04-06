@@ -33,6 +33,19 @@ namespace BookStore_Api.Controllers
 
 
         /// <summary>
+        /// Deletes the Fly
+        /// </summary>
+        /// <param name="id"></param>
+        // DELETE api/<HomeController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            _logger.LogInfo("Accessed Flys Home Controller and got a Warning");
+        }
+
+
+
+        /// <summary>
         /// Gets Flys ID values
         /// </summary>
         /// <param name="id"></param>
@@ -83,17 +96,7 @@ namespace BookStore_Api.Controllers
         {
         }
 
-        /// <summary>
-        /// Deletes the Fly
-        /// </summary>
-        /// <param name="id"></param>
-        // DELETE api/<HomeController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-            _logger.LogInfo("Accessed Flys Home Controller and got a Warning");
-        }
-
+       
 
        
 
