@@ -13,6 +13,9 @@ using System.Reflection;
 using BookStore_Api.Services;
 using BookStore_Api.Contracts;
 using BookStore_Api.Data.Mappings;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace BookStore_Api
 {
@@ -37,18 +40,32 @@ namespace BookStore_Api
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddCors(o =>
-            {
-                o.AddPolicy("CorsPolicy",
-                    Builder => Builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader());
-
-            }   
-                
+                    {
+                        o.AddPolicy("CorsPolicy",
+                            Builder => Builder.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader());
+                    }                   
                 );
 
 
             services.AddAutoMapper(typeof(Maps));
+
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(o =>
+                {
+                    o.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = Configuration["Jwt:Issuers"],
+                        ValidAudience = Configuration["Jwt:Issuers"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                    };
+                });
 
 
             services.AddSwaggerGen(c => {
