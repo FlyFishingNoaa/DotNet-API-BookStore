@@ -92,7 +92,8 @@ namespace BookStore_Api.Controllers
                 new Claim(ClaimTypes.NameIdentifier, user.Id)
             };
             var roles = await _userManager.GetRolesAsync(user);
-            claims.AddRange(roles.Select(r => new Claim(ClaimsIdentity.DefaultNameClaimType, r)));
+            //claims.AddRange(roles.Select(r => new Claim(ClaimsIdentity.DefaultNameClaimType, r)));
+            claims.AddRange(roles.Select(r => new Claim(ClaimsIdentity.DefaultRoleClaimType, r)));
 
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
                 _config["Jwt:Issuer"],

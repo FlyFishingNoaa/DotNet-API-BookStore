@@ -2,12 +2,14 @@
 using BookStore_Api.Contracts;
 using BookStore_Api.Data;
 using BookStore_Api.Data.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace BookStore_Api.Controllers
 {
@@ -43,6 +45,7 @@ namespace BookStore_Api.Controllers
         /// </summary>
         /// <returns>List of Authors</returns>
         [HttpGet]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAuthors()
@@ -70,6 +73,7 @@ namespace BookStore_Api.Controllers
         /// <param name="id"></param>
         /// <returns>Ruturns Author from Flys book store</returns>
         [HttpGet("{id}")]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -98,12 +102,16 @@ namespace BookStore_Api.Controllers
 
 
 
+       
         /// <summary>
-        /// Creates a new Author in Flys Book Store
+        /// Creates a new Author in Flys Book Store - Administrator
         /// </summary>
         /// <param name="authorDTO"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
+         //////// [Authorize]
+        ////[AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -150,6 +158,7 @@ namespace BookStore_Api.Controllers
         /// <param name="authorDTO"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator, Customer")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -196,12 +205,13 @@ namespace BookStore_Api.Controllers
 
 
         /// <summary>
-        /// Updates Author info in Flys Book Store
+        /// Deletes Author info in Flys Book Store
         /// </summary>
         /// <param name="id"></param>
         /// <param name="authorDTO"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator, Customer")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
