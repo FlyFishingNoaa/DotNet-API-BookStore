@@ -113,7 +113,8 @@ namespace BookStore_Api.Controllers
          //////// [Authorize]
         ////[AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        ////[ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Create([FromBody] AuthorCreateDTO authorDTO)
         {
