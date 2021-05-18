@@ -25,7 +25,10 @@ namespace BookStore_Api.Data
 
                 var user = new IdentityUser
                 {
-                    UserName = "admin",
+
+                    ////This Maybe
+                    UserName = "admin@bookstore.com",
+                    //UserName = "admin",
                     Email = "admin@bookstore.com"
 
                 };
@@ -45,7 +48,9 @@ namespace BookStore_Api.Data
             {
                 var user = new IdentityUser
                 {
-                    UserName = "FlyByNight",
+                   // UserName = "FlyByNight",
+
+                    UserName = "flyBynight@bookstore.com",
                     Email = "flyBynight@bookstore.com"
 
                 };
