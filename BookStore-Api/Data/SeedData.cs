@@ -33,7 +33,8 @@ namespace BookStore_Api.Data
 
                 if (result.Succeeded)
                 {
-                  await userManager.AddToRoleAsync(user, "Administrator");
+                    //Administrator
+                    await userManager.AddToRoleAsync(user, "Administrator");
                 }
 
             }
