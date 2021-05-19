@@ -108,7 +108,11 @@ namespace BookStore_Api
             }
 
 
-            app.UseSwagger(setupAction: null);
+           app.UseSwagger(setupAction: null);
+           // app.UseSwagger();
+          
+
+
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Book Store API");
