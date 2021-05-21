@@ -14,7 +14,7 @@ namespace FlysBookStore_UI.Data
         public Task<WeatherForecast[]> GetForecastAsync(DateTime startDate)
         {
             var rng = new Random();
-            return Task.FromResult(Enumerable.Range(1, 10).Select(index => new WeatherForecast
+            return Task.FromResult(Enumerable.Range(1, 20).Select(index => new WeatherForecast
             {
                 Date = startDate.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
