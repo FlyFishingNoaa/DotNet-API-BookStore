@@ -12,7 +12,6 @@ namespace BookStore_Api.Data
 
         public async static Task Seed(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-
            await SeedRoles(roleManager);
            await SeedUsers(userManager);
         }
@@ -27,8 +26,8 @@ namespace BookStore_Api.Data
                 {
 
                     ////This Maybe
-                    UserName = "admin@bookstore.com",
-                    //UserName = "admin",
+                    //UserName = "admin@bookstore.com",
+                    UserName = "admin",
                     Email = "admin@bookstore.com"
 
                 };
@@ -48,9 +47,8 @@ namespace BookStore_Api.Data
             {
                 var user = new IdentityUser
                 {
-                   // UserName = "FlyByNight",
-
-                    UserName = "flyBynight@bookstore.com",
+                    UserName = "FlyByNight",
+                   // UserName = "flyBynight@bookstore.com",
                     Email = "flyBynight@bookstore.com"
 
                 };
@@ -77,6 +75,7 @@ namespace BookStore_Api.Data
             {
                 var role = new IdentityRole
                 {
+                    //Administrator
                     Name = "Administrator"
                 };
                await roleManager.CreateAsync(role);
