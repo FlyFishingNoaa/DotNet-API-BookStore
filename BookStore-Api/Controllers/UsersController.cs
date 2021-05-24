@@ -42,11 +42,62 @@ namespace BookStore_Api.Controllers
 
 
 
+        [HttpPost]
+        [Route("Register")]
+        public async Task<IActionResult> Register([FromBody] UserDTO userDTO)
+
+        {
+            var location = GetControllerActionNames();
+
+            try
+            {
+                // var username = userDTO.UserName;
+                var username = userDTO.EmailAddress;
+                var password = userDTO.Password;
+                _logger.LogInfo($"{location} : Login Attempt from user {username} ");
+                var result = await _signInManager.PasswordSignInAsync(username, password, false, false);
+
+                if (result.Succeeded)
+                {
+                    _logger.LogInfo($"{location} : {username} Had no issues logging in.");
+                    var user = await _userManager.FindByNameAsync(username);
+                    var tokenString = await GenerateJSONWebToken(user);
+                    return Ok(new { token = tokenString });
+                }
+
+                return Unauthorized(userDTO);
+
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogIError($"{e.Message } - {e.StackTrace }");
+                return StatusCode(500, "Opps The Fly Users Have an issue.");
+            }
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
         /// <summary>
         /// User Login Endpoint
         /// </summary>
         /// <param name="userDTO"></param>
         /// <returns></returns>
+        [Route("login")]
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] UserDTO userDTO)
@@ -57,7 +108,8 @@ namespace BookStore_Api.Controllers
 
             try
             {
-                var username = userDTO.UserName;
+               // var username = userDTO.UserName;
+                var username = userDTO.EmailAddress;
                 var password = userDTO.Password;
                 _logger.LogInfo($"{location} : Login Attempt from user {username} ");
                 var result = await _signInManager.PasswordSignInAsync(username, password, false, false);
