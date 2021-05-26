@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore-Api", "BookStore-Api\BookStore-Api.csproj", "{BD440854-F20E-4BDD-BA9F-BCF99590AD8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlysBookStore-UI", "FlysBookStore-UI\FlysBookStore-UI.csproj", "{44051177-7DDD-470B-9B27-EB2CD868EC0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlysBookStore-UI", "FlysBookStore-UI\FlysBookStore-UI.csproj", "{44051177-7DDD-470B-9B27-EB2CD868EC0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

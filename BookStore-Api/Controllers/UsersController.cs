@@ -42,6 +42,29 @@ namespace BookStore_Api.Controllers
 
 
 
+        //[Route("register")]
+        //[HttpPost]
+        //public async Task<IActionResult> Register([FromBody] UserDTO userDTO)
+        //{
+        //    try
+        //    {
+        //        var username = userDTO.UserName;
+        //        var password = userDTO.Password;
+        //        var user = new IdentityUser { Email = username, UserName = username };
+
+
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        _logger.LogIError($"{e.Message } - {e.StackTrace }");
+        //    }
+
+
+        //}
+
+
+
+
         /// <summary>
         /// User Login Endpoint
         /// </summary>
