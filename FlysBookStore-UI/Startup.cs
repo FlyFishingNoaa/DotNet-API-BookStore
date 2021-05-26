@@ -1,4 +1,6 @@
+using FlysBookStore_UI.Contracts;
 using FlysBookStore_UI.Data;
+using FlysBookStore_UI.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +31,8 @@ namespace FlysBookStore_UI
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+            services.AddHttpClient();
+            services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

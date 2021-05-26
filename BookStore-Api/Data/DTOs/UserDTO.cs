@@ -9,8 +9,9 @@ namespace BookStore_Api.Data.DTOs
     {
 
 
-        public String UserName { get; set; }
+       // public String UserName { get; set; }
         public string Password { get; set; }
+        public string EmailAddress { get; set; }
 
     }
 }

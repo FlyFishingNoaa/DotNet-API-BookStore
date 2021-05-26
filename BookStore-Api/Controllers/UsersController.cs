@@ -41,6 +41,47 @@ namespace BookStore_Api.Controllers
 
 
 
+        /// <summary>
+        /// Register
+        /// </summary>
+        /// <param name="userDTO"></param>
+        /// <returns></returns>
+        [Route("register")]
+        [HttpPost]
+        public async Task<IActionResult> Register([FromBody] UserDTO userDTO)
+        {
+
+            var location = GetControllerActionNames();
+            try
+            {
+                var username = userDTO.EmailAddress;
+                var password = userDTO.Password;
+                var user = new IdentityUser { Email = username, UserName = username };
+                var result = await _userManager.CreateAsync(user, password);
+                if (!result.Succeeded)
+                {
+                    _logger.LogIError($"{username} Failed Registration Attempt");
+                    foreach (var error in result.Errors)
+                    {
+                        _logger.LogIError($"{location} : {error.Code} {error.Description}");
+                    }
+                    return InternalError($"{location} Failed Registration Attempt");
+                }
+
+             
+                return Ok(new { result.Succeeded });
+               
+            }
+            catch (Exception e)
+            {
+                return InternalError($"{location} Failed Registration Attempt");
+            }
+
+
+        }
+
+
+
 
         /// <summary>
         /// User Login Endpoint
@@ -57,7 +98,7 @@ namespace BookStore_Api.Controllers
 
             try
             {
-                var username = userDTO.UserName;
+                var username = userDTO.EmailAddress;
                 var password = userDTO.Password;
                 _logger.LogInfo($"{location} : Login Attempt from user {username} ");
                 var result = await _signInManager.PasswordSignInAsync(username, password, false, false);

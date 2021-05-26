@@ -1,0 +1,73 @@
+﻿@page "/Register"
+
+@using FlysBookStore_UI.Models
+@using FlysBookStore_UI.Contracts
+
+@inject IAuthenticationRepository _authrepo
+@inject NavigationManager _navMan
+
+<div class="card">
+    <h3 class="card-title">Register Now</h3>
+    @if (isFailed)
+    {
+        <div class="alert alert-danger">
+            <p>Something went wrong with the registration attempt</p>
+        </div>
+    }
+
+    <div class="card-body">
+        <EditForm Model="Model" OnValidSubmit="HandleRegistration">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <InputText Id="email" class="form-control" @bind-Value="Model.EmailAddress" />
+                <ValidationMessage For="@(() => Model.EmailAddress)" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <InputText Id="password" class="form-control" @bind-Value="Model.Password" />
+                <ValidationMessage For="@(() => Model.Password)" />
+            </div>
+            <div class="form-group">
+                <label for="confirmpassword">Confirm Password</label>
+                <InputText Id="confirmpassword" class="form-control" @bind-Value="Model.ConfirmPassword" />
+                <ValidationMessage For="@(() => Model.ConfirmPassword)" />
+            </div>
+            <button type="submit" class=" btn btn-primary btn btn-block">Submit</button>
+
+        </EditForm>
+
+
+
+
+
+
+    </div>
+
+</div>
+
+@code {
+
+    public bool isFailed = false;
+
+    private RegistrationModel Model = new RegistrationModel();
+
+    private async Task HandleRegistration()
+    {
+        var responce = await _authrepo.Register(Model);       
+
+        if (responce)
+        {
+            _navMan.NavigateTo("/");
+        }
+        else
+        {
+            isFailed = true;
+        }
+
+    }
+
+
+}
