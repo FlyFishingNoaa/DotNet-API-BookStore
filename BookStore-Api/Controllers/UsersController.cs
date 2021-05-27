@@ -88,10 +88,11 @@ namespace BookStore_Api.Controllers
         /// </summary>
         /// <param name="userDTO"></param>
         /// <returns></returns>
+        [Route("login")]
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] UserDTO userDTO)
-        
+
         {
 
             var location = GetControllerActionNames();
@@ -111,9 +112,9 @@ namespace BookStore_Api.Controllers
                     return Ok(new { token = tokenString });
                 }
 
-               return Unauthorized(userDTO);
+                return Unauthorized(userDTO);
 
-              
+
             }
             catch (Exception e)
             {
@@ -146,7 +147,7 @@ namespace BookStore_Api.Controllers
                 signingCredentials: credentials
                 );
             return new JwtSecurityTokenHandler().WriteToken(token);
-              }
+        }
 
 
         private string GetControllerActionNames()

@@ -56,16 +56,38 @@
 
     private async Task HandleRegistration()
     {
-        var responce = await _authrepo.Register(Model);       
 
-        if (responce)
+        try
         {
-            _navMan.NavigateTo("/");
+            var responce = await _authrepo.Register(Model);
+
+            if (responce)
+            {
+                _navMan.NavigateTo("/");
+            }
+            else
+            {
+                isFailed = true;
+            }
         }
-        else
+        catch (Exception e)
         {
-            isFailed = true;
+
+            throw;
         }
+
+
+
+        //var responce = await _authrepo.Register(Model);
+
+        //if (responce)
+        //{
+        //    _navMan.NavigateTo("/");
+        //}
+        //else
+        //{
+        //    isFailed = true;
+        //}
 
     }
 
