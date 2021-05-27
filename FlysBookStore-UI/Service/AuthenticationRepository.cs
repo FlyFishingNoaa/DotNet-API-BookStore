@@ -14,6 +14,10 @@ namespace FlysBookStore_UI.Service
     public class AuthenticationRepository : IAuthenticationRepository
     {
         private readonly IHttpClientFactory _client;
+        
+
+
+
 
         public AuthenticationRepository(IHttpClientFactory client)
         {
