@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using FlysBookStore_UI.Contracts;
 using FlysBookStore_UI.Data;
 using FlysBookStore_UI.Service;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,8 +32,10 @@ namespace FlysBookStore_UI
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddBlazoredLocalStorage();
             services.AddSingleton<WeatherForecastService>();
             services.AddHttpClient();
+            services.AddScoped<JwtSecurityTokenHandler>();
             services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
         }
 

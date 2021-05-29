@@ -10,6 +10,7 @@ namespace FlysBookStore_UI.Models
     {
         [Required]
         [EmailAddress]
+        [Display(Name = "Email Address")]
 
         //public String UserName { get; set; }
         public String EmailAddress { get; set; }
@@ -34,6 +35,17 @@ namespace FlysBookStore_UI.Models
 
     public class LoginModel
     {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email Address")]
+
+        //public String UserName { get; set; }
+        public String EmailAddress { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [StringLength(15, ErrorMessage = "Your password is must be {2} to {1} characters", MinimumLength = 6)]
+        public string Password { get; set; }
 
     }
 }
