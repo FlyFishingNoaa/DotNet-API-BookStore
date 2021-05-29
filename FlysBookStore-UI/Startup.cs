@@ -1,9 +1,11 @@
 using Blazored.LocalStorage;
 using FlysBookStore_UI.Contracts;
 using FlysBookStore_UI.Data;
+using FlysBookStore_UI.Providers;
 using FlysBookStore_UI.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
@@ -35,6 +37,9 @@ namespace FlysBookStore_UI
             services.AddBlazoredLocalStorage();
             services.AddSingleton<WeatherForecastService>();
             services.AddHttpClient();
+            services.AddScoped<ApiAuthenticationStateProvider>();
+            services.AddScoped<AuthenticationStateProvider>(prop =>
+            prop.GetRequiredService<ApiAuthenticationStateProvider>());
             services.AddScoped<JwtSecurityTokenHandler>();
             services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
         }
