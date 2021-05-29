@@ -18,7 +18,7 @@ namespace FlysBookStore_UI.Service
     {
         private readonly IHttpClientFactory _client;
         private readonly ILocalStorageService _localStorage;
-        public readonly AuthenticationStateProvider _authenticationStateProvider;
+        private readonly AuthenticationStateProvider _authenticationStateProvider;
         
 
         public AuthenticationRepository(IHttpClientFactory client, ILocalStorageService localStorage, AuthenticationStateProvider authenticationStateProvider)
@@ -61,7 +61,7 @@ namespace FlysBookStore_UI.Service
             var token = JsonConvert.DeserializeObject<TokenResponce>(content);
 
             //Store Token
-            await _localStorage.SetItemAsync("authtoken", token.Token);
+            await _localStorage.SetItemAsync("authToken", token.Token);
 
             //Change auth state of app
            await ((ApiAuthenticationStateProvider)_authenticationStateProvider).LoggedIn();

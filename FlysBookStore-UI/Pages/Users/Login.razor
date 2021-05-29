@@ -1,4 +1,4 @@
-﻿@page "/Register"
+﻿@page "/login"
 
 @using FlysBookStore_UI.Models
 @using FlysBookStore_UI.Contracts
@@ -6,9 +6,12 @@
 @inject IAuthenticationRepository _authrepo
 @inject NavigationManager _navMan
 
+
+
+
 <div class="card">
-    <h3 class="card-title">Register Now</h3>
-    @if (!responce)
+    <h3 class="card-title">Log In </h3>
+    @if (isFailed)
     {
         <div class="alert alert-danger">
             <p>Something went wrong with the registration attempt</p>
@@ -16,7 +19,7 @@
     }
 
     <div class="card-body">
-        <EditForm Model="Model" OnValidSubmit="HandleRegistration">
+        <EditForm Model="Model" OnValidSubmit="HandleLogin">
             <DataAnnotationsValidator />
             <ValidationSummary />
 
@@ -30,42 +33,41 @@
                 <InputText Id="password" class="form-control" @bind-Value="Model.Password" />
                 <ValidationMessage For="@(() => Model.Password)" />
             </div>
-            <div class="form-group">
-                <label for="confirmpassword">Confirm Password</label>
-                <InputText Id="confirmpassword" class="form-control" @bind-Value="Model.ConfirmPassword" />
-                <ValidationMessage For="@(() => Model.ConfirmPassword)" />
-            </div>
-            <button type="submit" class=" btn btn-primary btn btn-block">Submit</button>
+          
+            <button type="submit" class=" btn btn-primary btn btn-block">Login</button>
 
         </EditForm>
+
+
+
+
+
+
     </div>
+
 </div>
 
 @code {
 
-    // public bool isFailed = false;
+    public bool isFailed = false;
 
-    private RegistrationModel Model = new RegistrationModel();
+    private LoginModel Model = new LoginModel();
 
-    public bool responce = true;
-
-    private async Task HandleRegistration()
+    private async Task HandleLogin()
     {
 
         try
         {
-            var responce = await _authrepo.Register(Model);
+            var responce = await _authrepo.Login(Model);
 
             if (responce)
             {
-                _navMan.NavigateTo("/login");
+                _navMan.NavigateTo("/");
             }
-
-
-            //else
-            //{
-            //    isFailed = true;
-            //}
+            else
+            {
+                isFailed = true;
+            }
         }
         catch (Exception e)
         {
@@ -74,19 +76,5 @@
         }
 
 
-
-        //var responce = await _authrepo.Register(Model);
-
-        //if (responce)
-        //{
-        //    _navMan.NavigateTo("/");
-        //}
-        //else
-        //{
-        //    isFailed = true;
-        //}
-
     }
-
-
 }
