@@ -49,11 +49,23 @@ namespace BookStore_Api.Services
             return await _db.Authors.AnyAsync(q => q.Id == id);
         }
 
+        //public async Task<bool> Save()
+        //{
+        //    var changes = await _db.SaveChangesAsync();
+        //    return changes > 0;
+        //}
+
         public async Task<bool> Save()
         {
             var changes = await _db.SaveChangesAsync();
             return changes > 0;
         }
+
+
+
+
+
+
 
         public async Task<bool> Update(Author entity)
         {

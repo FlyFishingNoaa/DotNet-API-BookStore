@@ -183,6 +183,7 @@ namespace BookStore_Api.Controllers
                     return BadRequest(ModelState);
                 }
                 var author = _mapper.Map<Author>(authorDTO);
+               // var isSuccess = await _authorRepository.Save(author);
                 var isSuccess = await _authorRepository.Update(author);
 
                 if (!isSuccess)
