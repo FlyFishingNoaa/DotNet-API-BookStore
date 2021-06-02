@@ -18,7 +18,7 @@
 
         public int? AuthorID { get; set; }
 
-        public virtual AuthorModel Author { get; set; }
+        public virtual Author Author { get; set; }
 
 
 

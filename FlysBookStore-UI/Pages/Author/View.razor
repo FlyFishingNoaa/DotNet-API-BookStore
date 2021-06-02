@@ -81,7 +81,8 @@ else
     [Parameter]
     public string Id { get; set; }
 
-    private AuthorModel Model = new AuthorModel();
+    private Author Model = new Author();
+    private bool isSuccess = false;
 
     protected async override Task OnInitializedAsync()
     {
@@ -90,6 +91,22 @@ else
         int id = Convert.ToInt32(Id);
         Model = await _repo.Get(Endpoints.AuthorsEndpoint, id);
     }
+
+
+
+
+    //private async Task EditAuthor()
+    //{
+    //    isSuccess = await _repo.Update(Endpoints.AuthorsEndpoint, Model, Model.Id);
+    //    if (isSuccess)
+    //    {
+    //      //  _toastService.ShowWarning("Author Updated Successfully", "");
+    //        BackToList();
+    //    }
+
+    //}
+
+
 
 
     private void BackToList()

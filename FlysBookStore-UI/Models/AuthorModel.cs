@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FlysBookStore_UI.Models
 {
-    public class AuthorModel
+    public class Author
     {
         
         public int Id { get; set; }

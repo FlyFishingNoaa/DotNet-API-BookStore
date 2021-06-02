@@ -6,7 +6,7 @@ using FlysBookStore_UI.Models;
 
 namespace FlysBookStore_UI.Contracts
 {
-    public interface IAuthorRepository : IBaseRepository<AuthorModel>
+    public interface IAuthorRepository : IBaseRepository<Author>
     {
 
 
