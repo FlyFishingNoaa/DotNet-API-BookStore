@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FlysBookStore_UI.Service
 {
-    public class AuthorRepository : BaseRepository<AuthorModel>, IAuthorRepository
+    public class AuthorRepository : BaseRepository<Author>, IAuthorRepository
     {
 
 

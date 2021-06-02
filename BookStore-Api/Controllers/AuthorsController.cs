@@ -172,8 +172,14 @@ namespace BookStore_Api.Controllers
                     _logger.LogWarn($"Empty Request was submitted");
                     return BadRequest(ModelState);
                 }
-                var isExists = await _authorRepository.FindByID(id);
-                if (isExists == null)
+
+
+               // var isExists = await _authorRepository.FindByID(id);
+                var isExists = await _authorRepository.isExists(id);
+
+
+
+                if (!isExists)
                 {
                     return NotFound();
                 }

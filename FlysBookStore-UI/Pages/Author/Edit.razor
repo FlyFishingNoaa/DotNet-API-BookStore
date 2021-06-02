@@ -52,7 +52,7 @@ else
     [Parameter]
     public string Id { get; set; }
 
-    private AuthorModel Model = new AuthorModel();
+    private Author Model = new Author();
     private bool isSuccess = true;
 
 
@@ -63,8 +63,12 @@ else
     }
 
 
-    private async Task EditAuthor()
+    private async Task EditAuthor()        
     {
+        
+       //_repo.Update
+        
+        
         bool isSuccess = await _repo.Update(Endpoints.AuthorsEndpoint, Model, Model.Id);
         if (isSuccess)
         {
