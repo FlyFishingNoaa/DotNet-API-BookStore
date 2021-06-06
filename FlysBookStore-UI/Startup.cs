@@ -43,6 +43,8 @@ namespace FlysBookStore_UI
             services.AddScoped<JwtSecurityTokenHandler>();
             services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
             services.AddTransient<IAuthorRepository, AuthorRepository>();
+            services.AddTransient<IBookRepository,BookRepository>();
+            services.AddTransient<IFileUpload,FileUpload>();
             //services.AddScoped<IAuthorRepository, AuthorRepository>();
         }
 
