@@ -5,10 +5,12 @@
 
 
 
-
+<h3 class="card-title">Edit Author</h3>
+<hr />
+<br />
 @if (!isSuccess)
 {
-    <LoadingMessage Message="Somewthing Went Wrong With the Operation" />
+    <ErrorMessage Message="Somewthing Went Wrong With the Operation" />
 }
 else if (Model == null)
 {
@@ -63,12 +65,12 @@ else
     }
 
 
-    private async Task EditAuthor()        
+    private async Task EditAuthor()
     {
-        
-       //_repo.Update
-        
-        
+
+        //_repo.Update
+
+
         bool isSuccess = await _repo.Update(Endpoints.AuthorsEndpoint, Model, Model.Id);
         if (isSuccess)
         {
