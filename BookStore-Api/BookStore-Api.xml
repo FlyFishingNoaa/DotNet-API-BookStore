@@ -37,7 +37,7 @@
             <param name="authorDTO"></param>
             <returns></returns>
         </member>
-        <member name="M:BookStore_Api.Controllers.AuthorsController.Delete(System.Int32,BookStore_Api.Data.DTOs.AuthorDeleteDTO)">
+        <member name="M:BookStore_Api.Controllers.AuthorsController.Delete(System.Int32)">
             <summary>
             Deletes Author info in Flys Book Store
             </summary>

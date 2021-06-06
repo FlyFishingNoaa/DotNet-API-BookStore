@@ -33,7 +33,10 @@ namespace FlysBookStore_UI.Service
             if (obj == null)            
                 return false;
            
-            request.Content = new StringContent(JsonConvert.SerializeObject(obj));
+            //request.Content = new StringContent(JsonConvert.SerializeObject(obj));
+
+            request.Content = new StringContent(JsonConvert.SerializeObject(obj)
+              , Encoding.UTF8, "application/json");
 
             var client = _client.CreateClient();
             client.DefaultRequestHeaders.Authorization =
@@ -63,12 +66,20 @@ namespace FlysBookStore_UI.Service
             client.DefaultRequestHeaders.Authorization =
              new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", await GetBearerToken());
             //HttpRequestMessage
-            var responce = await client.SendAsync(request);
-            if (responce.StatusCode == System.Net.HttpStatusCode.NoContent)
+            //var responce = await client.SendAsync(request);
+
+
+           
+           
+
+            HttpResponseMessage response = await client.SendAsync(request);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
                 return true;
 
             return false;
 
+           
 
 
 
@@ -78,7 +89,7 @@ namespace FlysBookStore_UI.Service
 
         public async Task<T> Get(string url, int id)
         {
-              var request = new HttpRequestMessage(HttpMethod.Get, url + id);           
+              var request = new HttpRequestMessage(HttpMethod.Get, url+id);           
 
             var client = _client.CreateClient();
             client.DefaultRequestHeaders.Authorization =
