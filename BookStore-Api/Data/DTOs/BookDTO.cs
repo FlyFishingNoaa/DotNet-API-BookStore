@@ -68,8 +68,8 @@ namespace BookStore_Api.Data.DTOs
 
         public int? Year { get; set; }
 
-        //[Required]
-        //public string Isbn { get; set; }
+        [Required]
+        public string Isbn { get; set; }
 
         [StringLength(500)]
         public string Summary { get; set; }

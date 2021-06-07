@@ -1,4 +1,5 @@
 using Blazored.LocalStorage;
+using Blazored.Toast;
 using FlysBookStore_UI.Contracts;
 using FlysBookStore_UI.Data;
 using FlysBookStore_UI.Providers;
@@ -35,6 +36,7 @@ namespace FlysBookStore_UI
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddBlazoredLocalStorage();
+            services.AddBlazoredToast();
             services.AddSingleton<WeatherForecastService>();
             services.AddHttpClient();
             services.AddScoped<ApiAuthenticationStateProvider>();
