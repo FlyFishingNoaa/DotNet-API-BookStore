@@ -2,6 +2,7 @@
 @attribute [Authorize(Roles = "Administrator")]
 @inject IAuthorRepository _repo
 @inject NavigationManager _navManager
+@inject IToastService _toastService
 
 
 
@@ -74,7 +75,7 @@ else
         bool isSuccess = await _repo.Update(Endpoints.AuthorsEndpoint, Model, Model.Id);
         if (isSuccess)
         {
-            // _toastService.ShowWarning("Author Updated Successfully", "");
+            _toastService.ShowWarning("Author Updated Successfully", "");
             BackToList();
         }
 
