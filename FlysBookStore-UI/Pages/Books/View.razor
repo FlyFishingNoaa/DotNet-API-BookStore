@@ -1,7 +1,7 @@
 ﻿@page "/books/view/{Id}"
 @inject IBookRepository _repo
 @inject NavigationManager _navManager
-@*@inject IToastService _toastService*@
+@inject IToastService _toastService
 
 
 <h3>View Book Details</h3>
@@ -17,7 +17,7 @@ else if (Model == null)
 }
 else
 {
-    //_toastService.ShowInfo($"Now Viewing {Model.Title}", "");
+    _toastService.ShowInfo($"Now Viewing {Model.Title}", "");
 
     <div class="row">
         <div class="col-6">
