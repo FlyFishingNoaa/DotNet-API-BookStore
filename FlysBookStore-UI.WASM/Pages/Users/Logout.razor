@@ -1,0 +1,27 @@
+﻿@page "/logout"
+@using FlysBookStore_UI.Contracts
+
+@inject IAuthenticationRepository _authrepo
+@inject NavigationManager _navMan
+
+
+
+
+
+
+
+
+
+
+
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+
+    {
+        await _authrepo.Logout();
+        _navMan.NavigateTo("/");
+    }
+
+}
