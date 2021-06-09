@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
-using FlysBookStore_UI.Providers;
+using FlysBookStore_UI.WASM.Providers;
 
 namespace FlysBookStore_UI.WASM.Service
 {
