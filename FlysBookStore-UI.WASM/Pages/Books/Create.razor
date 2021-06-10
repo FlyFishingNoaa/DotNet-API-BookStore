@@ -3,7 +3,7 @@
 
 @inject IBookRepository _repo
 @inject IAuthorRepository _authorRepo
-@*@inject IFileUpload _fileUpload*@
+@inject IFileUpload _fileUpload
 @inject NavigationManager _navManager
 @inject IToastService _toastService
 
@@ -74,8 +74,8 @@
 @code {
     private Book Model = new Book();
     private IList<Author> Authors;
-    private IBrowserFile file;
-    //private IFileListEntry file;
+    //private IBrowserFile file;
+    private IFileListEntry file;
     private bool isSuccess = true;
     private bool isInvalidFileType = false;
     private string imageDataURL;
@@ -99,13 +99,16 @@
                 var picName = $"{picId}{ext}";
                 // var ms = new MemoryStream();
                 //await _fileUpload.UploadFile(ms, picName);
-                // await _fileUpload.UploadFile(file, picName);
+               // await _fileUpload.UploadFile(file, picName);
 
 
 
-                _fileUpload.UploadFile(file, msfile, picName);
+                //_fileUpload.UploadFile(file, msfile, picName);
 
                 Model.Image = picName;
+
+                _fileUpload.RemoveFile(Model.Image);
+                _fileUpload.UploadFile(file, msfile, picName);
 
 
 

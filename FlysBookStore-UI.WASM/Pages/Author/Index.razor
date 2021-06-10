@@ -1,6 +1,7 @@
 ﻿@page "/authors/"
 
 @inject IAuthorRepository _repo
+@*@inject HttpClient _client*@
 
 @*@using FlysBookStore_UI.Static*@
 
@@ -85,6 +86,7 @@ else
     protected async override Task OnInitializedAsync()
     {
         Model = await _repo.Get(Endpoints.AuthorsEndpoint);
+        //Model = await _client.GetFromJsonAsync<IList<Author>>(Endpoints.AuthorsEndpoint);
     }
 
 

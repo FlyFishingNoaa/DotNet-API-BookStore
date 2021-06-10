@@ -13,10 +13,10 @@ namespace FlysBookStore_UI.WASM.Service
     {
 
 
-        private readonly IHttpClientFactory _client;
+        private readonly HttpClient _client;
         private readonly ILocalStorageService _localStorage;
 
-        public AuthorRepository(IHttpClientFactory client, ILocalStorageService localstorage) :base(client, localstorage)
+        public AuthorRepository(HttpClient client, ILocalStorageService localstorage) :base(client, localstorage)
         {
             _client = client;
             _localStorage = localstorage;

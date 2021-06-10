@@ -29,19 +29,25 @@ namespace FlysBookStore_UI.WASM
         //    await builder.Build().RunAsync();
         //}
         {
+            //var builder = WebAssemblyHostBuilder.CreateDefault(args);
+            //builder.RootComponents.Add<App>("#app");
+
+            //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+            //_ = new JwtHeader();
+            //_ = new JwtPayload();
+
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
-            builder.RootComponents.Add<App>("#app");
+            builder.RootComponents.Add<App>("app");
+
+
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
-            _ = new JwtHeader();
-            _ = new JwtPayload();
-
-
-            builder.Services.AddScoped(sp => new HttpClient
-            { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            //builder.Services.AddScoped(sp => new HttpClient
+            //{ BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddBlazoredToast();
+            builder.Services.AddScoped<JwtSecurityTokenHandler>();
             builder.Services.AddScoped<ApiAuthenticationStateProvider>();
             builder.Services.AddScoped<AuthenticationStateProvider>(p =>
                 p.GetRequiredService<ApiAuthenticationStateProvider>());

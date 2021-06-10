@@ -1,6 +1,7 @@
 ﻿@page "/login"
 
-
+@using FlysBookStore_UI.WASM.Models
+@using FlysBookStore_UI.WASM.Contracts
 
 @inject IAuthenticationRepository _authrepo
 @inject NavigationManager _navMan
@@ -32,7 +33,7 @@
                 <InputText Id="password" class="form-control" @bind-Value="Model.Password" />
                 <ValidationMessage For="@(() => Model.Password)" />
             </div>
-          
+
             <button type="submit" class=" btn btn-primary btn btn-block">Login</button>
 
         </EditForm>

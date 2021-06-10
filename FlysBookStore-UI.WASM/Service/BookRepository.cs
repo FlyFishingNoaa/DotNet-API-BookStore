@@ -11,10 +11,10 @@ namespace FlysBookStore_UI.WASM.Service
 {
     public class BookRepository : BaseRepository<Book>, IBookRepository
     {
-        private readonly IHttpClientFactory _client;
+        private readonly HttpClient _client;
         private readonly ILocalStorageService _localStorage;
 
-        public BookRepository(IHttpClientFactory client,
+        public BookRepository(HttpClient client,
             ILocalStorageService localStorage) : base(client, localStorage)
         {
             _client = client;
