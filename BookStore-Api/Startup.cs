@@ -39,14 +39,25 @@ namespace BookStore_Api
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddCors(o =>
-                    {
-                        o.AddPolicy("CorsPolicy",
-                            Builder => Builder.AllowAnyOrigin()
-                            .AllowAnyMethod()
-                            .AllowAnyHeader());
-                    }                   
-                );
+            //services.AddCors(o =>
+            //        {
+            //            o.AddPolicy("CorsPolicy",
+            //                Builder => Builder.AllowAnyOrigin()
+            //                .AllowAnyMethod()
+            //                .AllowAnyHeader());
+            //        }                   
+            //    );
+
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder
+                        .AllowAnyMethod()
+                        .AllowCredentials()
+                        .SetIsOriginAllowed((host) => true)
+                        .AllowAnyHeader());
+            });
 
 
             services.AddAutoMapper(typeof(Maps));
@@ -127,7 +138,9 @@ namespace BookStore_Api
 
             app.UseHttpsRedirection();
 
-            app.UseCors(":CorsPolicy");
+            //app.UseCors(":CorsPolicy");
+
+            app.UseCors("CorsPolicy");
 
 
             SeedData.Seed(userManager, roleManager).Wait();
