@@ -24,6 +24,8 @@ namespace FlysBookStore_UI.WASM.Models
 
         public virtual Author Author { get; set; }
 
+        public string File { get; set; }
+
 
 
 
