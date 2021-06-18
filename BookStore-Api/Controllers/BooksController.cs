@@ -2,6 +2,7 @@
 using BookStore_Api.Contracts;
 using BookStore_Api.Data;
 using BookStore_Api.Data.DTOs;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -23,15 +24,22 @@ namespace BookStore_Api.Controllers
         private readonly iBookRepository _bookRepository;
         private readonly ILoggerServices _logger;
         private readonly IMapper _mapper;
+        private readonly IWebHostEnvironment _env;
+        //public FileUpload(IWebHostEnvironment env)
+        //{
+        //    _env = env;
+        //}
 
-        public BooksController(iBookRepository BookRepository, ILoggerServices logger, IMapper mapper)
+        public BooksController(iBookRepository BookRepository, ILoggerServices logger, IMapper mapper, IWebHostEnvironment env)
         {
             _bookRepository = BookRepository;
             _logger = logger;
             _mapper = mapper;
+            _env = env;
         }
 
-
+        private string GetImagePath(string fileName)
+         => ($"{_env.ContentRootPath}\\uploads\\{fileName}");
 
 
         /// <summary>
@@ -186,9 +194,13 @@ namespace BookStore_Api.Controllers
                     _logger.LogWarn($"Bad Data Dude");
                     return InternalError($"Did not write to Flys Book store ");
                 }
-
-
-                //todo: add logging 
+                if (!string.IsNullOrEmpty(bookDTO.File))
+                {
+                    var imgPath = GetImagePath(bookDTO.Image);
+                    byte[] imageBytes = Convert.FromBase64String(bookDTO.File);
+                    System.IO.File.WriteAllBytes(imgPath, imageBytes);
+                }
+                _logger.LogInfo($"{location}: Creation was successful");
                 return Created("Create", new {book});
             }
             catch (Exception e)

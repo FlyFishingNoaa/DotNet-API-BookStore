@@ -3,11 +3,11 @@
 
 @inject IBookRepository _repo
 @inject IAuthorRepository _authorRepo
-@inject IFileUpload _fileUpload
+@*@inject IFileUpload _fileUpload*@
 @inject NavigationManager _navManager
 @inject IToastService _toastService
 
-@using System.IO
+@*@using System.IO*@
 
 <h3>Create Book</h3>
 <hr />
@@ -80,7 +80,7 @@
     private bool isInvalidFileType = false;
     private string imageDataURL;
     //private Stream msFile;
-    private MemoryStream msfile;
+    private MemoryStream msFile;
 
 
     protected override async Task OnInitializedAsync()
@@ -99,21 +99,16 @@
                 var picName = $"{picId}{ext}";
                 // var ms = new MemoryStream();
                 //await _fileUpload.UploadFile(ms, picName);
-               // await _fileUpload.UploadFile(file, picName);
+                // await _fileUpload.UploadFile(file, picName);
 
 
 
                 //_fileUpload.UploadFile(file, msfile, picName);
 
                 Model.Image = picName;
-
-                _fileUpload.RemoveFile(Model.Image);
-                _fileUpload.UploadFile(file, msfile, picName);
-
-
-
-
-
+                Model.File = Convert.ToBase64String(msFile.ToArray());
+                //_fileUpload.RemoveFile(Model.Image);
+                //_fileUpload.UploadFile(file, msfile, picName);
             }
 
             isSuccess = await _repo.Create(Endpoints.BooksEndpoint, Model);
@@ -140,10 +135,11 @@
 
                 //var ms = new MemoryStream();
 
-                msfile = new MemoryStream();
-                await file.Data.CopyToAsync(msfile);
+              //  msfile = new MemoryStream();
+                await file.Data.CopyToAsync(msFile);
+
                 var reader = new StreamReader(file.Data);
-                var imageBase64Data = Convert.ToBase64String(msfile.ToArray());
+                var imageBase64Data = Convert.ToBase64String(msFile.ToArray());
                 imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
                 isInvalidFileType = false;
             }
