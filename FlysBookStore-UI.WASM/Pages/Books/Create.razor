@@ -122,20 +122,13 @@
 
     private async Task HandleFileSelection(IFileListEntry[] files)
     {
-
         file = files.FirstOrDefault();
-
-        //// file = e.File;
         if (file != null)
         {
-
-            var name = file.Name;
-            if (name.Contains("jpg") || name.Contains("PNG") || name.Contains("jpeg"))
+            var ext = Path.GetExtension(file.Name);
+            if (ext.Contains("jpg") || ext.Contains("PNG") || ext.Contains("jpeg"))
             {
-
-                //var ms = new MemoryStream();
-
-              //  msfile = new MemoryStream();
+                msFile = new MemoryStream();
                 await file.Data.CopyToAsync(msFile);
 
                 var reader = new StreamReader(file.Data);
@@ -143,22 +136,6 @@
                 imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
                 isInvalidFileType = false;
             }
-
-
-            //var ext = Path.GetExtension(file.Name);
-            //if (ext.Contains("jpg") || ext.Contains("png") || ext.Contains("jpeg"))
-            //{
-            //    // msFile = file.OpenReadStream();
-
-            //    var resizedImageFile = await file.RequestImageFileAsync("image/png", 100, 100);
-
-            //    var buffer = new byte[resizedImageFile.Size];
-            //    await resizedImageFile.OpenReadStream().ReadAsync(buffer);
-
-            //    var imageBase64Data = Convert.ToBase64String(buffer);
-            //    imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
-            //    isInvalidFileType = false;
-            //}
             else
             {
                 isInvalidFileType = true;
