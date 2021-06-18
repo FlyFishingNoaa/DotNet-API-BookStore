@@ -39,7 +39,7 @@ namespace BookStore_Api.Controllers
         }
 
         private string GetImagePath(string fileName)
-         => ($"{_env.ContentRootPath}\\uploads\\{fileName}");
+         => ($"{_env.ContentRootPath}\\Uploads\\{fileName}");
 
 
         /// <summary>
@@ -196,7 +196,9 @@ namespace BookStore_Api.Controllers
                 }
                 if (!string.IsNullOrEmpty(bookDTO.File))
                 {
-                    var imgPath = GetImagePath(bookDTO.Image);
+                    // var imgPath = GetImagePath(bookDTO.Image);
+
+                    var imgPath = $"{_env.ContentRootPath}\\Uploads\\{bookDTO.Image}";
                     byte[] imageBytes = Convert.FromBase64String(bookDTO.File);
                     System.IO.File.WriteAllBytes(imgPath, imageBytes);
                 }
