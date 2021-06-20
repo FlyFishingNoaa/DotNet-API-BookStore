@@ -8,6 +8,6 @@ namespace BookStore_Api.Contracts
 {
     public interface iBookRepository : IRepositoryBase<Book>
     {
-        //public Task<string> GetImageFileName(int id);
+        public Task<string> GetImageFileName(int id);
     }
 }
