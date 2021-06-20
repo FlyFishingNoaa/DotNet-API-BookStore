@@ -2,7 +2,7 @@
 @attribute [Authorize]
 
 @inject IBookRepository _repo
-@*@inject IToastService _toastService*@
+@inject IToastService _toastService
 
 <h3>Index</h3>
 <hr />
@@ -46,7 +46,7 @@ else
                 {
                     <tr>
                         <td>
-                            <img src="uploads/@book.Image" class="img-thumbnail" style="height:100px;width:100px" />
+                            <img src="@string.Format("data:image/png;base64,{0}", book.File)" class="img-thumbnail" style="height:100px;width:100px" />
                         </td>
                         <td>@book.Title</td>
                         <td>@book.Isbn</td>
