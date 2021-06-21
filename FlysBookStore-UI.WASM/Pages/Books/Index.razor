@@ -50,7 +50,7 @@ else
                         </td>
                         <td>@book.Title</td>
                         <td>@book.Isbn</td>
-                        <td>@string.Format("{0:C}", book.Price)</td>
+                        <td>@string.Format("{0:C}", book.Price.ToString())</td>
                         <td>
                             @if (@book.Author == null)
                             {
