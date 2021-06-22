@@ -40,8 +40,8 @@ namespace FlysBookStore_UI.WASM
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            _ = new JwtHeader();
-            _ = new JwtPayload();
+            //_ = new JwtHeader();
+            //_ = new JwtPayload();
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             //builder.Services.AddScoped(sp => new HttpClient
